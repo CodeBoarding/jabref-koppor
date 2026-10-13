@@ -13,6 +13,11 @@ Note that this project **does not** adhere to [Semantic Versioning](https://semv
 
 - We added a dark appearance variant of the macOS application icon. [#17290](https://github.com/JabRef/jabref/issues/17290)
 - We added ARM64 Flatpak builds and nightly, beta, and stable channels. [#13349](https://github.com/JabRef/jabref/issues/13349)
+- In directory libraries, a sidecar and its PDF are now renamed together to the configured filename pattern (Preferences > Linked files) whenever the entry is edited — e.g. changing the citation key renames both files. [#741](https://github.com/JabRef/jabref-koppor/pull/741)
+- The groups panel of a directory library now mirrors the folder structure: each subdirectory appears as a group containing the entries whose files live there (updated live as files change). [#740](https://github.com/JabRef/jabref-koppor/pull/740)
+- Directory libraries now save into their sidecar files: edits are written back automatically (debounced until typing pauses; Ctrl+S forces the write and no longer creates a `.bib`), the first edit of a PDF-only entry creates a Markdown sidecar (`X.md` with the Hayagriva data as frontmatter and the comment fields as notes body), renaming a citation key renames the YAML key, and deleting an entry removes it from its file (the file is trashed once empty, the PDF stays). Hand-written content that JabRef does not understand survives rewrites. [#739](https://github.com/JabRef/jabref-koppor/pull/739)
+- Directory libraries now stay in sync with external file changes: creating, editing, deleting, or renaming `.yml`/`.md`/`.pdf` files in the opened folder updates the open library live, and renames keep the affected entries (selection and undo history survive). [#738](https://github.com/JabRef/jabref-koppor/pull/738)
+- We added "Open folder as library" (File menu): a folder of PDFs and Hayagriva sidecar files (`.yml`, or `.md` notes with a Hayagriva frontmatter) opens as a library, and it is reopened on the next start. PDFs without a sidecar appear right away and get their metadata extracted in the background. Edits are not yet written back to the files. [#737](https://github.com/JabRef/jabref-koppor/pull/737)
 - We added ARM64 Flatpak builds, nightly, beta, and stable channels, and host editor integration. [#13349](https://github.com/JabRef/jabref/issues/13349)
 - We added `jabkit git merge-driver`, a Git merge driver that merges `.bib` files semantically. [#16838](https://github.com/JabRef/jabref/pull/16838)
 - We added Markdown table rendering to AI chat responses and AI summaries. [#17142](https://github.com/JabRef/jabref/pull/17142)
@@ -26,6 +31,8 @@ Note that this project **does not** adhere to [Semantic Versioning](https://semv
 - The context window size for AI models unknown to JabRef (e.g., local models) now defaults to 64k tokens instead of 8k. [#17326](https://github.com/JabRef/jabref/pull/17326)
 - We now show which web search fetchers have a saved API key. [#16250](https://github.com/JabRef/jabref/issues/16250)
 - We improved the error message shown when Semantic Scholar restricts access to a paper's references. [#17291](https://github.com/JabRef/jabref/issues/17291)
+- Automatic file linking no longer links the Markdown sidecars of a directory library (Markdown files with a Hayagriva frontmatter); other Markdown files are still linked. [#741](https://github.com/JabRef/jabref-koppor/pull/741)
+- We changed the Hayagriva YAML export to keep data JabRef cannot edit (short titles, person aliases, additional identifiers) when re-exporting an imported file, to write comments, and to derive `date` from the BibTeX year/month fields. [#736](https://github.com/JabRef/jabref-koppor/pull/736)
 
 ### Fixed
 
