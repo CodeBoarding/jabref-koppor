@@ -33,6 +33,6 @@ jobs:
     steps:
       - uses: CodeBoarding/CodeBoarding-action@test/jabref-java25
         with:
-          # CodeBoarding's free hosted tier. No secret to add: the run authenticates
-          # with the GitHub OIDC token that `id-token: write` above grants.
-          llm: hosted
+          # A CodeBoarding license: the free hosted tier's weekly quota ran out.
+          llm: license
+          license_key: ${{ secrets.CODEBOARDING_LICENSE }}
